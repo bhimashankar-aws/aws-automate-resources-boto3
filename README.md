@@ -198,19 +198,20 @@ The project provides practical experience with AWS automation, cloud resource ma
 ## Screenshots
 
 ### Project Screenshot 1
-![AWS Resource Automation Screenshot 1](Screenshot%202026-10-12%20160814.png)
+![Project Screenshot 1](./Screenshot%202026-10-12%20160814.png)
 
 ### Project Screenshot 2
-![AWS Resource Automation Screenshot 2](Screenshot%202026-10-12%20160856.png)
+![Project Screenshot 2](./Screenshot%202026-10-12%20160856.png)
 
 ### Project Screenshot 3
-![AWS Resource Automation Screenshot 3](Screenshot%202026-10-12%20160911.png)
+![Project Screenshot 3](./Screenshot%202026-10-12%20160911.png)
 
 ### Project Screenshot 4
-![AWS Resource Automation Screenshot 4](Screenshot%202026-10-12%20160929.png)
+![Project Screenshot 4](./Screenshot%202026-10-12%20160929.png)
 
 ### Project Screenshot 5
-![AWS Resource Automation Screenshot 5](Screenshot%202026-10-12%20160946.png)
+![Project Screenshot 5](./Screenshot%202026-10-12%20160946.png)
+
 
 
 S3 bucket creation and file operations
