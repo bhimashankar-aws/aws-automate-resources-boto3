@@ -198,8 +198,7 @@ The project provides practical experience with AWS automation, cloud resource ma
 ## Screenshots
 
 ### Project Screenshot 1
-### Project Screenshot 1
-![Project Screenshot 1](https://raw.githubusercontent.com/bhimashankar-aws/aws-automate-resources-boto3/main/Screenshot%202026-10-12%20160814.png)
+![AWS Resource Automation Screenshot 1](./Screenshot%202026-10-12%20160814.png)
 
 ### Project Screenshot 2
 ![Project Screenshot 2](./Screenshot%202026-10-12%20160856.png)
