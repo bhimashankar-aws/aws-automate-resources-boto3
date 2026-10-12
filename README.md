@@ -193,12 +193,12 @@ This project successfully demonstrates how Python and Boto3 can be used to autom
 
 Instead of performing every operation manually through the AWS Management Console, the project uses Python scripts to interact with AWS services through APIs.
 
-The project provides practical experience with AWS automation, cloud resource management, IAM permissions, and Python-based DevOps workflows.
+The project provides practical experience with AWS automation, cloud resource management, IAM permissions, and Python-based DevOps workflows. 
 
-## Screenshots
+Screenshots
 
 ### Project Screenshot 1
-![Project Screenshot 1](https://raw.githubusercontent.com/bhimashankar-aws/aws-automate-resources-boto3/main/Screenshot%202026-10-12%20160814.png)
+![Project Screenshot 1](./Screenshot%202026-10-12%20160814.png)
 
 ### Project Screenshot 2
 ![Project Screenshot 2](./Screenshot%202026-10-12%20160856.png)
