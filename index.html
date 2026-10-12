@@ -1,0 +1,485 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AWS Resource Automation | Python & Boto3</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #1e3a5f);
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 24px;
+        }
+
+        header span {
+            font-size: 14px;
+            color: #cbd5e1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: white;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #e8f1ff;
+            color: #1769aa;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 44px;
+            color: #14213d;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+            color: #64748b;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .services {
+            max-width: 1100px;
+            margin: 55px auto;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px 28px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.07);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 35px rgba(15, 23, 42, 0.13);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+            color: #172554;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: #1769aa;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .workflow {
+            max-width: 1000px;
+            margin: 70px auto;
+            padding: 0 25px;
+            text-align: center;
+        }
+
+        .workflow h2 {
+            font-size: 30px;
+            color: #172554;
+            margin-bottom: 30px;
+        }
+
+        .flow {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+            font-size: 17px;
+            line-height: 2;
+        }
+
+        .flow strong {
+            color: #1769aa;
+        }
+
+        .about {
+            max-width: 900px;
+            margin: 70px auto;
+            padding: 0 25px;
+            text-align: center;
+        }
+
+        .about-box {
+            background: #172554;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .about-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .about-box p {
+            color: #dbeafe;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #111827;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+        }
+
+        /* Popup */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.7);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 999;
+        }
+
+        .modal-box {
+            background: white;
+            width: 100%;
+            max-width: 550px;
+            border-radius: 20px;
+            padding: 35px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 12px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-box h2 {
+            color: #172554;
+            margin-bottom: 15px;
+        }
+
+        .modal-box p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .modal-box ul {
+            padding-left: 20px;
+            color: #334155;
+            line-height: 1.9;
+        }
+
+        @media (max-width: 800px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h2 {
+                font-size: 34px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>AWS Resource Automation</h1>
+    <span>Python & Boto3</span>
+</header>
+
+<section class="hero">
+
+    <div class="tag">AWS CLOUD AUTOMATION PROJECT</div>
+
+    <h2>Automate AWS Resources with Python</h2>
+
+    <p>
+        A practical AWS automation project using Python and Boto3
+        to manage Amazon S3, Amazon EC2, and AWS IAM resources
+        programmatically.
+    </p>
+
+</section>
+
+<section class="services">
+
+    <div class="card" onclick="showService('s3')">
+
+        <div class="icon">☁️</div>
+
+        <h3>Amazon S3</h3>
+
+        <p>
+            Automate bucket and object management using Python
+            and Boto3.
+        </p>
+
+        <div class="button">Explore S3</div>
+
+    </div>
+
+
+    <div class="card" onclick="showService('ec2')">
+
+        <div class="icon">🖥️</div>
+
+        <h3>Amazon EC2</h3>
+
+        <p>
+            Launch, stop and terminate EC2 instances
+            programmatically.
+        </p>
+
+        <div class="button">Explore EC2</div>
+
+    </div>
+
+
+    <div class="card" onclick="showService('iam')">
+
+        <div class="icon">🔐</div>
+
+        <h3>AWS IAM</h3>
+
+        <p>
+            Retrieve users, groups and policies using
+            Python and Boto3.
+        </p>
+
+        <div class="button">Explore IAM</div>
+
+    </div>
+
+</section>
+
+
+<section class="workflow">
+
+    <h2>How the Automation Works</h2>
+
+    <div class="flow">
+
+        <strong>Python Scripts</strong>
+        &nbsp; → &nbsp;
+        <strong>Boto3 SDK</strong>
+        &nbsp; → &nbsp;
+        <strong>AWS APIs</strong>
+        &nbsp; → &nbsp;
+        <strong>S3 / EC2 / IAM</strong>
+
+    </div>
+
+</section>
+
+
+<section class="about">
+
+    <div class="about-box">
+
+        <h2>Project Purpose</h2>
+
+        <p>
+            The purpose of this project is to demonstrate how
+            repetitive AWS resource management tasks can be
+            automated using Python and Boto3 instead of
+            performing every operation manually through the
+            AWS Management Console.
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    AWS Resource Automation Using Python & Boto3
+    <br><br>
+    Bhimashankar Dhumal
+
+</footer>
+
+
+<!-- Popup -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeModal()">×</span>
+
+        <h2 id="modalTitle"></h2>
+
+        <p id="modalDescription"></p>
+
+        <ul id="modalList"></ul>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const services = {
+
+        s3: {
+            title: "Amazon S3 Automation",
+            description:
+                "Python and Boto3 are used to automate common S3 resource operations.",
+            items: [
+                "Create an S3 bucket",
+                "List S3 buckets",
+                "Upload files",
+                "Download objects",
+                "Delete objects"
+            ]
+        },
+
+        ec2: {
+            title: "Amazon EC2 Automation",
+            description:
+                "EC2 instances are managed programmatically using Python and Boto3.",
+            items: [
+                "Launch a t3.micro instance",
+                "Check instance state",
+                "Stop an instance",
+                "Terminate an instance",
+                "Verify instance status"
+            ]
+        },
+
+        iam: {
+            title: "AWS IAM Automation",
+            description:
+                "IAM information is retrieved programmatically using Python and Boto3.",
+            items: [
+                "List IAM users",
+                "Retrieve IAM user details",
+                "Retrieve user groups",
+                "List attached group policies",
+                "Verify AWS identity using STS"
+            ]
+        }
+
+    };
+
+
+    function showService(service) {
+
+        const data = services[service];
+
+        document.getElementById("modalTitle").textContent =
+            data.title;
+
+        document.getElementById("modalDescription").textContent =
+            data.description;
+
+        const list = document.getElementById("modalList");
+
+        list.innerHTML = "";
+
+        data.items.forEach(function(item) {
+
+            const li = document.createElement("li");
+
+            li.textContent = item;
+
+            list.appendChild(li);
+
+        });
+
+        document.getElementById("modal").style.display = "flex";
+    }
+
+
+    function closeModal() {
+
+        document.getElementById("modal").style.display = "none";
+
+    }
+
+
+    window.onclick = function(event) {
+
+        const modal = document.getElementById("modal");
+
+        if (event.target === modal) {
+
+            closeModal();
+
+        }
+
+    };
+
+</script>
+
+</body>
+</html>
+```
