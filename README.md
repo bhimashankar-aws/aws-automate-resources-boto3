@@ -212,6 +212,7 @@ The project provides practical experience with AWS automation, cloud resource ma
 ### Project Screenshot 5
 ![AWS Resource Automation Screenshot 5](Screenshot%202026-10-12%20160946.png)
 
+
 S3 bucket creation and file operations
 EC2 instance launch, stop, and termination
 IAM user and group information
